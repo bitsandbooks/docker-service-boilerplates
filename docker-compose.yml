@@ -1,0 +1,16 @@
+---
+name: ${PROJECT_NAME}
+networks:
+  default:
+    name: ${HOST_GROUP_NAME}
+    # external: true # If network already exists, use this and comment out rest
+    # For specific subnets, use or modify the configuration below
+    driver: bridge
+    attachable: true
+    # internal: true # OPTIONAL: If Internet access is unneeded for this network
+    # enable_ipv6: true # OPTIONAL: affects IPv6 subnet line below
+    ipam:
+      config:
+        - subnet: ${HOST_NETWORK_IPV4_CIDR}
+          gateway: ${HOST_NETWORK_IPV4_GATEWAY}
+        # - subnet: fe80:db8::/64 # OPTIONAL: requires `enable_ipv6: true`

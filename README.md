@@ -1,2 +1,25 @@
-# docker-service-boilerplates
-A collection of services that I've run at various times
+# Startup Services Using Docker Compose
+
+Provides an easy-to-extend stack of services via Docker Compose.
+
+## Requirements
+
+- A Linux host machine with Docker and Docker Compose installed.
+- a local user (such as `torgo`), as well as their UID (such as `1000`), and a local group (such as `valleylodge`), as well as its GID (such as `7000`). The user's primary group should be `valleylodge` and they should also be a member of the `docker` group.
+- a number of custom variables to make this "yours"
+
+## Shared Variables
+
+- `PROJECT_NAME`: Overall name of the project (or "stack", as it is called in Portainer). **Default:** `startup`
+- `DOCKER_NETWORK_IPV4_CIDR`: The IPv4 address of the Docker network we will use for our default "bridge" network, shared by most of our containers. **Default:** `172.18.0.0/24`
+- `DOCKER_NETWORK_IPV4_GATEWAY`: The IPv4 address of the gateway on the shared Docker network. **Default:** `172.18.0.1`
+- `HOST_GROUP_NAME`: The primary group name, used for the default network name. **Default:** `valleylodge`
+
+## Main Files
+
+- `docker-compose.yml`: Primary compose file. Provides overall project name, shared network and services.
+- `docker-compose.env`: Provides variables shared by multiple containers.
+
+## Usage
+
+To bring the stack up once at a terminal prompt, type `docker compose --env-file /path/to/docker-compose.env --file /path/to/docker-compose.yml up -d` and press `Enter`.
