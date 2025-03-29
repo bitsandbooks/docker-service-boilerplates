@@ -13,12 +13,27 @@ Provides an easy-to-extend stack of services via Docker Compose.
 - `PROJECT_NAME`: Overall name of the project (or "stack", as it is called in Portainer). **Default:** `startup`
 - `DOCKER_NETWORK_IPV4_CIDR`: The IPv4 address of the Docker network we will use for our default "bridge" network, shared by most of our containers. **Default:** `172.18.0.0/24`
 - `DOCKER_NETWORK_IPV4_GATEWAY`: The IPv4 address of the gateway on the shared Docker network. **Default:** `172.18.0.1`
+- `HOST_COMPOSE_FOLDER`: The folder in which the composed service and vars files reside. It can be an absolute or relative path. **Default:** `./compose.d`
+- `HOST_DATA_FOLDER`: The folder or mount in which stateful data lives. See below for more info. **Default:** `/var/local`
 - `HOST_GROUP_NAME`: The primary group name, used for the default network name. **Default:** `valleylodge`
+- `HOST_IPV4_LOCAL`: The IPv4 address of the host machine on the local network. **Default:** 192.168.1.2
+
+## `HOST_DATA_FOLDER`
+
+This folder is where stateful data lives for your services. Each service goes in an individually-named folder in `apps`, inside each of which reside sub-folders such as `config` or `data` for configuration and data, respectively. Several service files also refer to a `secrets` folder, which is where an encrypted filesystem containing sensitive data (such as password files) should be mounted.
 
 ## Main Files
 
 - `docker-compose.yml`: Primary compose file. Provides overall project name, shared network and services.
 - `docker-compose.env`: Provides variables shared by multiple containers.
+
+## Extending with Services
+
+Service definitions are kept in `HOST_COMPOSE_FOLDER` and loaded individually through the use of Docker Compose's `include` directive. See `docker-compose.yml` for an example of how to include services.
+
+### Services available:
+
+- Traefik reverse proxy
 
 ## Usage
 

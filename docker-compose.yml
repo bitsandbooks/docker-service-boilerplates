@@ -14,3 +14,14 @@ networks:
         - subnet: ${HOST_NETWORK_IPV4_CIDR}
           gateway: ${HOST_NETWORK_IPV4_GATEWAY}
         # - subnet: fe80:db8::/64 # OPTIONAL: requires `enable_ipv6: true`
+
+include:
+  # # Include service files listed in ${HOST_COMPOSE_FOLDER} below to launch 
+  # # them when Docker becomes available on startup, using the same pattern as 
+  # # in the example below. If a service does not require an env_file, simply 
+  # # leave that line out.
+  # - path:     ${HOST_COMPOSE_FOLDER}/servicename.yml
+  #   env_file: ${HOST_COMPOSE_FOLDER}/servicename.env
+
+  - path:     ${HOST_COMPOSE_FOLDER}/traefik.yml
+    env_file: ${HOST_COMPOSE_FOLDER}/traefik.env
