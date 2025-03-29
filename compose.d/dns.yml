@@ -1,0 +1,24 @@
+services:
+  bind9:
+    image: ubuntu/bind9:latest
+    container_name: bind9
+    environment:
+      - BIND9_USER=${BIND9_USER}
+      - TZ=${HOST_TIME_ZONE}
+    volumes:
+      - ${HOST_DATA_FOLDER}/apps/bind9/config:/etc/bind
+      - ${HOST_DATA_FOLDER}/apps/bind9/cache:/var/cache/bind
+      - ${HOST_DATA_FOLDER}/apps/bind9/records:/var/lib/bind
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 1G
+      restart_policy:
+        condition: on-failure
+        max_attempts: 10
+    labels:
+      io.containers.autoupdate: registry
