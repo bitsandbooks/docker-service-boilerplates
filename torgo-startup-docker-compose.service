@@ -1,0 +1,17 @@
+[Unit]
+Description=Torgo brings up services for the Master
+DefaultDependencies=no
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker compose --env-file /path/to/docker-compose.env --file /path/to/docker-compose.yml up --detach
+ExecStop=/usr/bin/docker compose  --env-file /path/to/docker-compose.env --file /path/to/docker-compose.yml down
+User=torgo
+Group=valleylodge
+RemainAfterExit=yes
+TimeoutStartSec=180
+TimeoutStopSec=180
+
+[Install]
+WantedBy=multi-user.target

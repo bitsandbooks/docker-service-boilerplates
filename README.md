@@ -22,4 +22,6 @@ Provides an easy-to-extend stack of services via Docker Compose.
 
 ## Usage
 
-To bring the stack up once at a terminal prompt, type `docker compose --env-file /path/to/docker-compose.env --file /path/to/docker-compose.yml up -d` and press `Enter`.
+To bring the stack up once at a terminal prompt, type `docker compose --env-file /path/to/docker-compose.env --file /path/to/docker-compose.yml up -d` and press **Enter**.
+
+This repo also comes with a [`systemd.service(5)` unit file](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html) that can safely bring the stack up and down when the system is started, shut down or rebooted. Edit the `.service` unit file (point `ExecStart=` and `ExecStop=` to your Docker Compose files and make sure `User=` and `Group=` are set correctly), put the unit file in `/etc/systemd/system`, reload the daemon with `systemctl daemon-reload`, and start it with `systemctl enable --now torgo-startup-docker-compose.service`. Now, services described in `docker-compose.yml` should be safely brought up and down when the machine starts, shuts down, or reboots.
