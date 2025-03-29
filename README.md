@@ -10,6 +10,8 @@ Provides an easy-to-extend stack of services via Docker Compose.
 
 ## Shared Variables
 
+These variables are kept in `docker-compose.env` and are shared among services.
+
 - `PROJECT_NAME`: Overall name of the project (or "stack", as it is called in Portainer). **Default:** `startup`
 - `DOCKER_NETWORK_IPV4_CIDR`: The IPv4 address of the Docker network we will use for our default "bridge" network, shared by most of our containers. **Default:** `172.18.0.0/24`
 - `DOCKER_NETWORK_IPV4_GATEWAY`: The IPv4 address of the gateway on the shared Docker network. **Default:** `172.18.0.1`
@@ -18,9 +20,9 @@ Provides an easy-to-extend stack of services via Docker Compose.
 - `HOST_GROUP_NAME`: The primary group name, used for the default network name. **Default:** `valleylodge`
 - `HOST_IPV4_LOCAL`: The IPv4 address of the host machine on the local network. **Default:** 192.168.1.2
 
-## `HOST_DATA_FOLDER`
+### `HOST_DATA_FOLDER`
 
-This folder is where stateful data lives for your services. Each service goes in an individually-named folder in `apps`, inside each of which reside sub-folders such as `config` or `data` for configuration and data, respectively. Several service files also refer to a `secrets` folder, which is where an encrypted filesystem containing sensitive data (such as password files) should be mounted.
+This folder is where stateful data lives for your services. It should be owned by `torgo:valleylodge`. Each service goes in an individually-named folder under `apps`, inside each of which reside sub-folders such as `config` or `data` for configuration and data, respectively. Several service files also refer to a `secrets` folder, which is where an encrypted filesystem containing sensitive data (such as password files) should be mounted.
 
 ## Main Files
 
