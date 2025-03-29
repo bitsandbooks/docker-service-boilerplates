@@ -19,6 +19,7 @@ These variables are kept in `docker-compose.env` and are shared among services.
 - `HOST_DATA_FOLDER`: The folder or mount in which stateful data lives. See below for more info. **Default:** `/var/local`
 - `HOST_GROUP_NAME`: The primary group name, used for the default network name. **Default:** `valleylodge`
 - `HOST_IPV4_LOCAL`: The IPv4 address of the host machine on the local network. **Default:** 192.168.1.2
+- `HOST_TIME_ZONE`: The time zone of the host machine. **Default:** Etc/UTC
 
 ### `HOST_DATA_FOLDER`
 
