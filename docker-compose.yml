@@ -11,8 +11,8 @@ networks:
     # enable_ipv6: true # OPTIONAL: affects IPv6 subnet line below
     ipam:
       config:
-        - subnet: ${HOST_NETWORK_IPV4_CIDR}
-          gateway: ${HOST_NETWORK_IPV4_GATEWAY}
+        - subnet: ${DOCKER_NETWORK_IPV4_CIDR}
+          gateway: ${DOCKER_NETWORK_IPV4_GATEWAY}
         # - subnet: fe80:db8::/64 # OPTIONAL: requires `enable_ipv6: true`
 
 include:
