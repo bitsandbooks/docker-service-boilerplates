@@ -23,5 +23,6 @@ include:
   # - path:     ${HOST_COMPOSE_FOLDER}/servicename.yml
   #   env_file: ${HOST_COMPOSE_FOLDER}/servicename.env
 
+  - path:     ${HOST_COMPOSE_FOLDER}/docker-socket-proxy.yml
   - path:     ${HOST_COMPOSE_FOLDER}/traefik.yml
     env_file: ${HOST_COMPOSE_FOLDER}/traefik.env

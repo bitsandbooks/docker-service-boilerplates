@@ -1,0 +1,38 @@
+networks:
+  docker-socket:
+    attachable: true
+    internal: true
+services:
+  docker-socket-proxy:
+    # This container is EXPOSEd to the other containers on its default Docker 
+    # network, but binds to no PORTs on the host machine.
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest
+    container_name: docker-socket-proxy
+    environment:
+      - CONTAINERS=1 # Allow access to viewing containers
+      - SERVICES=1 # Allow access to viewing services (necessary when using Docker Swarm)
+      - TASKS=1 # Allow access to viewing tasks (necessary when using Docker Swarm)
+      - POST=0 # Disallow any POST operations (effectively read-only)
+      - LOG_LEVEL=info # debug,info,notice,warning,err,crit,alert,emerg
+      # - IMAGES=1
+      # - INF0: 1
+      # - NETWORKS: 1
+      # - NODES: 0
+    security_opt:
+      - no-new-privileges=true
+    networks:
+      - docker-socket
+    expose:
+      - 2375
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 1G
+      restart_policy:
+        condition: on-failure
+        max_attempts: 10
+    labels:
+      io.containers.autoupdate: registry

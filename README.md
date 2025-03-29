@@ -33,9 +33,10 @@ This folder is where stateful data lives for your services. It should be owned b
 
 Service definitions are kept in `HOST_COMPOSE_FOLDER` and loaded individually through the use of Docker Compose's `include` directive. See `docker-compose.yml` for an example of how to include services.
 
-### Services available:
+### Services available
 
-- Traefik reverse proxy
+- [Docker socket proxy](https://github.com/Tecnativa/docker-socket-proxy)
+- [Traefik](https://traefik.io/) reverse proxy
 
 ## Usage
 
